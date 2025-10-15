@@ -39,7 +39,7 @@ export default function Navbar() {
           <Link href="/products" className="hover:text-blue-600">
             Products
           </Link>
-          <Link href="/checkcout" className="hover:text-blue-600">
+          <Link href="/checkout" className="hover:text-blue-600">
             Checkout
           </Link>
         </div>

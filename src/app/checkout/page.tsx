@@ -61,10 +61,19 @@ const Page = () => {
       </Card>
       <form action={checkoutAction} className="max-w-md mx-auto">
         <input type="hidden" name="items" value={JSON.stringify(items)} />
-        <Button type="submit" className="w-full bg-green-500 hover:bg-green-800 cursor-pointer" variant={"default"}>
+        <Button
+          type="submit"
+          className="w-full bg-green-500 hover:bg-green-800 cursor-pointer"
+          variant={"default"}
+        >
           Proceed to Payment
         </Button>
-        <Button onClick={() => clearCart()} type="submit" className="w-full bg-red-500 mt-2 cursor-pointer hover:bg-red-800" variant={"default"}>
+        <Button
+          onClick={() => clearCart()}
+          type="submit"
+          className="w-full bg-red-500 mt-2 cursor-pointer hover:bg-red-800"
+          variant={"default"}
+        >
           Clear Cart
         </Button>
       </form>
