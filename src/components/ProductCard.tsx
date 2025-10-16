@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { ShoppingBag, ShoppingCart } from "lucide-react";
 import { useCartStore } from "../../store/card-store";
 import { useRouter } from "../../node_modules/next/navigation";
+import { MouseEvent } from "react"
 
 interface Props {
   product: Stripe.Product;
@@ -27,8 +28,9 @@ const ProductCard = ({ product }: Props) => {
     });
   };
 
-  const onBuyNow = (e: any) => {
+  const onBuyNow = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+
     onAddItem();
     router.push("/checkout");
   };
@@ -84,6 +86,7 @@ const ProductCard = ({ product }: Props) => {
                 Buy Now
               </Button>
             </div>
+            <div className="hidden">{items}</div>
           </CardContent>
         </CardHeader>
       </Card>
