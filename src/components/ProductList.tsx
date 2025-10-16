@@ -1,35 +1,48 @@
-"use client"
+"use client";
 
-import { memo, useState } from 'react';
-import Stripe from 'stripe';
-import ProductCard from './ProductCard';
+import { memo, useState } from "react";
+import Stripe from "stripe";
+import ProductCard from "./ProductCard";
 
 interface Props {
-    products: Stripe.Product[];
+  products: Stripe.Product[];
+  hideSearch?: boolean;
 }
 
+const ProductList = ({ products, hideSearch }: Props) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-const ProductList = ({products}: Props) => {
-    const [searchTerm, setSearchTerm] = useState<string>("")
+  const filteredProduct = products.filter((product) => {
+    const term = searchTerm.toLowerCase();
+    const nameMatch = product.name.toLowerCase().includes(term);
+    const descriptionMatch = product.description
+      ? product.description.toLowerCase().includes(term)
+      : false;
 
-    const filteredProduct = products.filter((product) => {
-        const term = searchTerm.toLowerCase()
-        const nameMatch = product.name.toLowerCase().includes(term)
-        const descriptionMatch = product.description ? product.description.toLowerCase().includes(term) : false
-
-        return nameMatch || descriptionMatch;
-    })
-
+    return nameMatch || descriptionMatch;
+  });
 
   return (
     <div>
-      <div className='mb-6 flex justify-center'>
-        <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className='w-full max-w-md rounded-2xl border-gray-300 border-2 px-4 py-2 focus:border-blue-600 ' type='text' placeholder='Search products...' />
-      </div>
+      {!hideSearch && (
+        <div className="mb-6 flex justify-center">
+          <input
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full max-w-md rounded-2xl border-gray-300 border-2 px-4 py-2 focus:border-blue-600 "
+            type="text"
+            placeholder="Search products..."
+          />
+        </div>
+      )}
 
-      <ul className='mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-        {filteredProduct.map((product ,key) => {
-            return <li key={key}><ProductCard product={product} /></li>
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {filteredProduct.map((product, key) => {
+          return (
+            <li key={key}>
+              <ProductCard product={product} />
+            </li>
+          );
         })}
       </ul>
     </div>
