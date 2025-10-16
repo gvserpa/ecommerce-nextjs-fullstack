@@ -33,6 +33,7 @@ const ProductCard = ({ product }: Props) => {
 
     onAddItem();
     router.push("/checkout");
+    console.log(items)
   };
 
   const price = product.default_price as Stripe.Price;
@@ -86,7 +87,6 @@ const ProductCard = ({ product }: Props) => {
                 Buy Now
               </Button>
             </div>
-            <div className="hidden">{items}</div>
           </CardContent>
         </CardHeader>
       </Card>
